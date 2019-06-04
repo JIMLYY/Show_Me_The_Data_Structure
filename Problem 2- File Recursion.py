@@ -24,8 +24,7 @@ def find_files(suffix, path):
             files = files + find_files(suffix,fullPath)
     return files
 
-
+# Test cases 
 print(find_files('.c','./testdir'))
-
-#print(os.listdir("./testdir"))
-#print(os.path.join("./testdir","subdir3"))
+print(os.listdir("./testdir"))
+print(os.path.join("./testdir","subdir3"))

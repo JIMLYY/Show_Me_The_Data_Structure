@@ -39,7 +39,7 @@ class blockChain:
             new_node = next_block(self.last)
             self.last = new_node
             
-# Test 
+# Test Cases
 a = blockChain()
 a.append()
 print(a.head.data)
