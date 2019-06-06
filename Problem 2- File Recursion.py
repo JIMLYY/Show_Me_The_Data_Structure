@@ -26,5 +26,5 @@ def find_files(suffix, path):
 
 # Test cases 
 print(find_files('.c','./testdir'))
-print(os.listdir("./testdir"))
-print(os.path.join("./testdir","subdir3"))
+print(find_files('.h','./testdir'))
+print(find_files('.gitkeep','./testdir'))
