@@ -19,13 +19,18 @@ class LRU_Cache(object):
 
     def set(self, key, value):
         # Set the value if the key is not present in the cache.
-        # If the cache is at capacity remove the oldest item. 
+        # If the cache is at capacity remove the oldest item.
+        if self.capacity == 0:
+            self.capacity = 1
         if len(self.cache_queue) >= self.capacity:
             del self.cache_dic[self.cache_queue.popleft()]
         self.cache_dic[key] = value
         self.cache_queue.append(key)
         
 # Test
+our_cache_0 = LRU_Cache(0)
+our_cache_0.set(1,1) # handle the corner case
+print(our_cache_0.get(1))
 our_cache = LRU_Cache(5)
 our_cache.set(1, 1)
 our_cache.set(2, 2)
