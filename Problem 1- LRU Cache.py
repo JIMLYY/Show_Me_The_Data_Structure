@@ -5,18 +5,25 @@ class LRU_Cache(object):
         # Initialize class variables
         self.capacity = capacity
         self.cache_dic = {}
-        self.cache_rec = collections.deque()
+        self.cache_queue = collections.deque()
 
     def get(self, key):
-        # Retrieve item from provided key. Return -1 if nonexistent. 
-        return self.cache_dic[key] if key in self.cache_dic else -1
+        # Retrieve item from provided key. Return -1 if nonexistent.
+        # Pop the key from the current location and move it to the start of the queue
+        if key in self.cache_queue:
+            self.cache_queue.remove(key)
+            self.cache_queue.append(key)
+            return self.cache_dic[key]
+        else:
+            return -1
 
     def set(self, key, value):
-        # Set the value if the key is not present in the cache. If the cache is at capacity remove the oldest item. 
-        if len(self.cache_rec) >= self.capacity:
-            del self.cache_dic[self.cache_rec.popleft()]
+        # Set the value if the key is not present in the cache.
+        # If the cache is at capacity remove the oldest item. 
+        if len(self.cache_queue) >= self.capacity:
+            del self.cache_dic[self.cache_queue.popleft()]
         self.cache_dic[key] = value
-        self.cache_rec.append(key)
+        self.cache_queue.append(key)
         
 # Test
 our_cache = LRU_Cache(5)
@@ -27,7 +34,11 @@ our_cache.set(4, 4)
 our_cache.set(5, 5)
 our_cache.set(6, 6)
 
-print(our_cache.get(1))       # returns -1
-print(our_cache.get(2))       # returns 2
-print(our_cache.get(5))       # returns 5
-print(our_cache.get(6))       # returns 6
+print(our_cache.get(1))       # print -1 and update self.cache_queue
+print(our_cache.cache_queue )
+print(our_cache.get(2))       # print 2 and update self.cache_queue
+print(our_cache.cache_queue )
+print(our_cache.get(5))       # print 5 and update self.cache_queue
+print(our_cache.cache_queue )
+print(our_cache.get(6))       # print 6 and update self.cache_queue
+print(our_cache.cache_queue )
