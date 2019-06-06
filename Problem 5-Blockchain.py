@@ -26,10 +26,10 @@ def next_block(last_block):
     next_hash = last_block.hash
     return Block(next_index, next_timestamp, next_data, next_hash)
 
-class blockChain:
+class BlockChain:
     def __init__(self):
-        self.head = None
-        self.last = None
+        self.head = create_primitive_block()
+        self.last = self.head
     def append(self):
         if self.head is None:
             self.head = create_primitive_block()
@@ -40,16 +40,21 @@ class blockChain:
             self.last = new_node
             
 # Test Cases
-a = blockChain()
-a.append()
-print(a.head.data)
-print(a.last.data)
-a.append()
-print(a.head.data)
-print(a.last.data)
-a.append()
-print(a.head.data)
-print(a.last.data)
+# corner case test (initiating the BlockChain() object but not adding anything)
+blockChain = BlockChain()
+print ("The first block was created at {}".format(blockChain.head.timestamp))
+print ("Let's add a new block!")
+blockChain.append()
+print("Now, the head is {}".format(blockChain.head.data))
+print("The tail is {}".format(blockChain.last.data))
+print ("Let's add a new block, again!")
+blockChain.append()
+print("Now, the head is still {}".format(blockChain.head.data))
+print("The tail is updated, which is {}.".format(blockChain.last.data))
+print ("Let's...I promise, this is the last addition. LOL")
+blockChain.append()
+print("The head is ...{}".format(blockChain.head.data))
+print("The tail is updated...{}".format(blockChain.last.data))
 
 # Inspired by: 
 # https://medium.com/@vishnuashok123/building-a-simple-blockchain-using-python-90d27ee50214
