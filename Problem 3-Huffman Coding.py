@@ -59,12 +59,13 @@ def huffmanTree(nodeQ):
         nodeQ.add(new)
     return nodeQ.pop()
 
+
 huffman_encode = {}
 huffman_decode = {}
 
 # get huffman code for each characters 
 def huffmanCode(root, ori_str):
-    global codeDic, codeList
+    #global codeDic, codeList
     if root:
         huffmanCode(root.left, ori_str+'0')
         root.code += ori_str
@@ -73,18 +74,26 @@ def huffmanCode(root, ori_str):
             huffman_encode[root.val] = root.code
         huffmanCode(root.right, ori_str+'1')
         
+
+        
+        
+        
 # get huffman code for whole string
 def huffman_encoding(string):
-    
     huffman_encoding_str = ""
     for char in string:
-        huffman_encoding_str += huffman_encode[char]
+        if huffman_encode[char] == "":
+            huffman_encoding_str += "0"
+        else:
+            huffman_encoding_str += huffman_encode[char]
     return huffman_encoding_str
 
 # decode a huffman code into string 
 def huffman_decoding(huffman_encoded_str):
     code = ""
     res = ""
+    if "1" not in huffman_encoded_str:
+        return huffman_decode[""]*len(huffman_encoded_str)
     for char in huffman_encoded_str:
         code += char
         if code in huffman_decode:
@@ -95,19 +104,26 @@ def huffman_decoding(huffman_encoded_str):
 
 if __name__ == "__main__":
     codes = {}
-
-    a_great_sentence = "The bird is the word"
+    # Debug cases
+    print("Debug cases")
+    a_great_sentence = "12345678"
+    print("debug1", cal_freq(a_great_sentence))
     node_q = nodeQueue(cal_freq(a_great_sentence))
+    print("debug2", node_q.size)
     tree = huffmanTree(node_q)
+    print("debug3", tree.val, tree.left, tree.right, tree.freq)
     huffmanCode(tree,"")
+    print("debug4",huffman_encode,huffman_decode)
     encoded_data = huffman_encoding(a_great_sentence)
     decoded_data = huffman_decoding(encoded_data)
-    
+    print("_____________________")
+    # Test cases
+    print("Test cases")
     print ("The size of the data is: {}\n".format(sys.getsizeof(a_great_sentence)))
     print ("The content of the data is: {}\n".format(a_great_sentence))
     print ("The size of the encoded data is: {}\n".format(sys.getsizeof(int(encoded_data, base=2))))
     print ("The content of the encoded data is: {}\n".format(encoded_data))
     print ("The size of the decoded data is: {}\n".format(sys.getsizeof(decoded_data)))
-    print ("The content of the encoded data is: {}\n".format(decoded_data))
+    print ("The content of the decoded data is: {}\n".format(decoded_data))
 
 # Reference: @ TomHawk's blog https://www.cnblogs.com/tomhawk/p/7471133.html  
