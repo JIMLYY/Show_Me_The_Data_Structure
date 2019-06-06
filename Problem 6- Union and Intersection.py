@@ -82,7 +82,7 @@ def intersection(llist_1, llist_2):
 
 
 # Test case 1
-
+print("Test case 1")
 linked_list_1 = LinkedList()
 linked_list_2 = LinkedList()
 
@@ -95,11 +95,11 @@ for i in element_1:
 for i in element_2:
     linked_list_2.append(i)
 
-print (union(linked_list_1,linked_list_2))
-print (intersection(linked_list_1,linked_list_2))
+print ("Union is... {}".format(union(linked_list_1,linked_list_2)))
+print ("Intersection is... {}".format(intersection(linked_list_1,linked_list_2)))
 
 # Test case 2
-
+print("Test case 2")
 linked_list_3 = LinkedList()
 linked_list_4 = LinkedList()
 
@@ -112,5 +112,23 @@ for i in element_1:
 for i in element_2:
     linked_list_4.append(i)
 
-print (union(linked_list_3,linked_list_4))
-print (intersection(linked_list_3,linked_list_4))
+print ("Union is... {}".format(union(linked_list_3,linked_list_4)))
+print ("Intersection is... {}".format(intersection(linked_list_3,linked_list_4)))
+
+# Test case 3
+print("Test case 3")
+linked_list_3 = LinkedList()
+linked_list_4 = LinkedList()
+
+element_1 = [1,5,6,100,101,102]
+element_2 = [50,51,52]
+
+for i in element_1:
+    linked_list_3.append(i)
+
+for i in element_2:
+    linked_list_4.append(i)
+
+print ("Union is... {}".format(union(linked_list_3,linked_list_4)))
+print ("Intersection is... {}".format(intersection(linked_list_3,linked_list_4)))
+
